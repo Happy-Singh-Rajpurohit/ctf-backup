@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ url_for('views.themes', path='css/challenge-board.css') }}">
+	<style>
+		/* ========== KEYFRAME ANIMATIONS ========== */
+		@keyframes glowPulse {
+			0%, 100% {
+				box-shadow: 0 0 20px rgba(0, 255, 255, 0.3),
+							0 0 40px rgba(0, 255, 255, 0.2),
+							inset 0 0 20px rgba(0, 255, 255, 0.1);
+			}
+			50% {
+				box-shadow: 0 0 30px rgba(0, 255, 255, 0.5),
+							0 0 60px rgba(0, 255, 255, 0.3),
+							inset 0 0 30px rgba(0, 255, 255, 0.2);
+			}
+		}
+
+		@keyframes slideIn {
+			from {
+				transform: translateY(-20px);
+				opacity: 0;
+			}
+			to {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+
+		@keyframes floatAnimation {
+			0%, 100% { transform: translateY(0px); }
+			50% { transform: translateY(-5px); }
+		}
+
+		@keyframes shimmer {
+			0% { left: -100%; }
+			100% { left: 100%; }
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes gridMove {
+			0% { background-position: 0 0, 0 0; }
+			100% { background-position: 50px 50px, 50px 50px; }
+		}
+
+		@keyframes circuitGlow {
+			0%, 100% { opacity: 0.3; }
+			50% { opacity: 0.7; }
+		}
+
+		@keyframes particleFloat {
+			0%, 100% { 
+				transform: translateY(0) translateX(0);
+				opacity: 0.3;
+			}
+			50% { 
+				transform: translateY(-20px) translateX(10px);
+				opacity: 0.7;
+			}
+		}
+
+		@keyframes scanline {
+			0% { transform: translateY(-100%); }
+			100% { transform: translateY(100%); }
+		}
+
+		/* ========== CYBER GRID BACKGROUND ========== */
+		.cyber-grid-background {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			pointer-events: none;
+			background-color: #000000;
+			background-image: 
+				linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+			background-size: 50px 50px;
+			animation: gridMove 20s linear infinite;
+		}
+
+		.cyber-grid-background::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+		}
+
+		/* ========== CIRCUIT PATTERNS ========== */
+		.circuit-left, .circuit-right {
+			position: fixed;
+			top: 0;
+			width: 200px;
+			height: 100%;
+			z-index: 1;
+			pointer-events: none;
+			opacity: 0.4;
+			animation: circuitGlow 4s ease-in-out infinite;
+		}
+
+		.circuit-left {
+			left: 0;
+			background-image: 
+				url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 800"><path d="M20,50 L50,50 L50,100 L100,100" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="50" cy="50" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="50" cy="100" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="100" cy="100" r="3" fill="%2300ffff" opacity="0.5"/><path d="M20,150 L80,150 L80,200 L120,200" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="80" cy="150" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="120" cy="200" r="3" fill="%2300ffff" opacity="0.5"/><path d="M30,250 L70,250 L70,300" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="70" cy="250" r="3" fill="%2300ffff" opacity="0.5"/><path d="M40,350 L90,350 L90,400 L130,400" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="90" cy="350" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="130" cy="400" r="3" fill="%2300ffff" opacity="0.5"/><rect x="60" y="450" width="20" height="20" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><path d="M25,550 L75,550 L75,600" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="75" cy="550" r="3" fill="%2300ffff" opacity="0.5"/></svg>');
+			background-repeat: repeat-y;
+			background-size: 200px auto;
+		}
+
+		.circuit-right {
+			right: 0;
+			background-image: 
+				url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 800"><path d="M180,50 L150,50 L150,100 L100,100" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="150" cy="50" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="150" cy="100" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="100" cy="100" r="3" fill="%2300ffff" opacity="0.5"/><path d="M180,150 L120,150 L120,200 L80,200" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="120" cy="150" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="80" cy="200" r="3" fill="%2300ffff" opacity="0.5"/><path d="M170,250 L130,250 L130,300" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="130" cy="250" r="3" fill="%2300ffff" opacity="0.5"/><path d="M160,350 L110,350 L110,400 L70,400" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="110" cy="350" r="3" fill="%2300ffff" opacity="0.5"/><circle cx="70" cy="400" r="3" fill="%2300ffff" opacity="0.5"/><rect x="120" y="450" width="20" height="20" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><path d="M175,550 L125,550 L125,600" stroke="%2300ffff" stroke-width="1" fill="none" opacity="0.3"/><circle cx="125" cy="550" r="3" fill="%2300ffff" opacity="0.5"/></svg>');
+			background-repeat: repeat-y;
+			background-size: 200px auto;
+		}
+
+		/* ========== DIGITAL PARTICLES ========== */
+		.particles-container {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			pointer-events: none;
+			overflow: hidden;
+		}
+
+		.particle {
+			position: absolute;
+			width: 3px;
+			height: 3px;
+			background: #00ffff;
+			border-radius: 50%;
+			box-shadow: 0 0 5px #00ffff;
+		}
+
+		.particle:nth-child(1) { left: 5%; top: 10%; animation: particleFloat 3s ease-in-out infinite; }
+		.particle:nth-child(2) { left: 15%; top: 30%; animation: particleFloat 4s ease-in-out infinite 0.5s; }
+		.particle:nth-child(3) { left: 10%; top: 60%; animation: particleFloat 3.5s ease-in-out infinite 1s; }
+		.particle:nth-child(4) { left: 8%; top: 80%; animation: particleFloat 4.5s ease-in-out infinite 1.5s; }
+		.particle:nth-child(5) { right: 5%; top: 15%; animation: particleFloat 3s ease-in-out infinite 0.3s; }
+		.particle:nth-child(6) { right: 12%; top: 40%; animation: particleFloat 4s ease-in-out infinite 0.8s; }
+		.particle:nth-child(7) { right: 8%; top: 65%; animation: particleFloat 3.5s ease-in-out infinite 1.2s; }
+		.particle:nth-child(8) { right: 10%; top: 85%; animation: particleFloat 4.5s ease-in-out infinite 1.7s; }
+
+		/* ========== SCANLINE EFFECT ========== */
+		.scanline {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.3), transparent);
+			z-index: 2;
+			pointer-events: none;
+			animation: scanline 8s linear infinite;
+		}
+
+		/* ========== MAIN CONTENT WRAPPER ========== */
+		.content-wrapper {
+			position: relative;
+			z-index: 10;
+		}
+
+		/* ========== BANNER SECTION ========== */
+		.cryptix-banner-section {
+			background: linear-gradient(180deg, 
+				rgba(0, 0, 0, 0.95) 0%, 
+				rgba(0, 26, 26, 0.95) 50%, 
+				rgba(0, 0, 0, 0.95) 100%);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0 8%;
+			margin: 0;
+			margin-top: -20px;
+			max-height: 120px;
+			overflow: hidden;
+			position: relative;
+			animation: glowPulse 3s ease-in-out infinite;
+			border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+		}
+
+		.cryptix-banner-section::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: 
+				repeating-linear-gradient(
+					90deg,
+					transparent,
+					transparent 2px,
+					rgba(0, 255, 255, 0.03) 2px,
+					rgba(0, 255, 255, 0.03) 4px
+				);
+			pointer-events: none;
+		}
+
+		.cryptix-banner-section img {
+			max-width: 100%;
+			width: 100%;
+			height: auto;
+			max-height: 120px;
+			display: block;
+			object-fit: contain;
+			animation: slideIn 1s ease-out, floatAnimation 4s ease-in-out infinite 1s;
+			filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4));
+		}
+
+		/* ========== CHALLENGE INSTRUCTIONS ========== */
+		.challenge-instructions {
+			background: linear-gradient(180deg, 
+				rgba(0, 0, 0, 0.95) 0%, 
+				rgba(0, 21, 21, 0.95) 100%);
+			text-align: center;
+			padding: 1.5rem 1rem 2rem 1rem;
+			margin: 0;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.challenge-instructions::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(
+				90deg,
+				transparent,
+				rgba(0, 255, 255, 0.1),
+				transparent
+			);
+			animation: shimmer 3s infinite;
+		}
+
+		.challenge-instructions h3 {
+			color: #00ffff;
+			font-size: 1.5rem;
+			font-weight: 400;
+			margin: 0;
+			text-shadow: 
+				0 0 10px rgba(0, 255, 255, 0.5),
+				0 0 20px rgba(0, 255, 255, 0.3),
+				0 0 30px rgba(0, 255, 255, 0.2);
+			position: relative;
+			z-index: 1;
+			animation: slideIn 1s ease-out 0.3s backwards;
+		}
+
+		/* ========== CONTAINER & CHALLENGES BOARD ========== */
+		.container {
+			max-width: 100% !important;
+			padding-left: 1rem !important;
+			padding-right: 1rem !important;
+			width: 100% !important;
+		}
+
+		#challenges-board {
+			width: 100%;
+			animation: fadeInUp 0.8s ease-out 0.5s backwards;
+		}
+
+		#challenges-board .card {
+			animation: fadeInUp 0.6s ease-out backwards;
+			transition: all 0.3s ease;
+			border: 1px solid rgba(0, 255, 255, 0.2);
+			background: linear-gradient(135deg, rgba(0, 26, 26, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+			backdrop-filter: blur(5px);
+		}
+
+		#challenges-board .card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 5px 25px rgba(0, 255, 255, 0.3);
+			border-color: rgba(0, 255, 255, 0.5);
+		}
+
+		/* ========== FOOTER SPACING ========== */
+		footer.footer {
+			margin-top: 0 !important;
+			padding-top: 1rem !important;
+			padding-bottom: 1rem !important;
+			background: transparent !important;
+			position: relative;
+			z-index: 10;
+		}
+
+		/* ========== STAGGERED CARD ANIMATIONS ========== */
+		#challenges-board .card:nth-child(1) { animation-delay: 0.6s; }
+		#challenges-board .card:nth-child(2) { animation-delay: 0.7s; }
+		#challenges-board .card:nth-child(3) { animation-delay: 0.8s; }
+		#challenges-board .card:nth-child(4) { animation-delay: 0.9s; }
+		#challenges-board .card:nth-child(5) { animation-delay: 1s; }
+		#challenges-board .card:nth-child(6) { animation-delay: 1.1s; }
+		#challenges-board .card:nth-child(7) { animation-delay: 1.2s; }
+		#challenges-board .card:nth-child(8) { animation-delay: 1.3s; }
+
+		/* ========== RESPONSIVE DESIGN ========== */
+		@media (max-width: 768px) {
+			.cryptix-banner-section {
+				padding: 0 4%;
+				max-height: 80px;
+			}
+			.cryptix-banner-section img {
+				max-height: 80px;
+			}
+			.challenge-instructions {
+				padding: 1rem 0.5rem 1.5rem 0.5rem;
+			}
+			.challenge-instructions h3 {
+				font-size: 1.2rem;
+			}
+			.container {
+				padding-left: 0.75rem !important;
+				padding-right: 0.75rem !important;
+			}
+			.circuit-left, .circuit-right {
+				width: 100px;
+				opacity: 0.2;
+			}
+		}
+
+		@media (max-width: 576px) {
+			.cryptix-banner-section {
+				padding: 0 2%;
+			}
+			.container {
+				padding-left: 0.5rem !important;
+				padding-right: 0.5rem !important;
+			}
+			.circuit-left, .circuit-right {
+				display: none;
+			}
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+<!-- Cyber Grid Background -->
+<div class="cyber-grid-background"></div>
+
+<!-- Circuit Patterns on Sides -->
+<div class="circuit-left"></div>
+<div class="circuit-right"></div>
+
+<!-- Digital Particles -->
+<div class="particles-container">
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+	<div class="particle"></div>
+</div>
+
+<!-- Scanline Effect -->
+<div class="scanline"></div>
+
+<!-- Main Content -->
+<div class="content-wrapper">
+	<div class="cryptix-banner-section">
+		<img src="{{ url_for('views.themes', path='img/cryptix-banner.jpg') }}" alt="CRYPTIX">
+	</div>
+
+	<div class="challenge-instructions">
+		<h3>Solve the below questions to get points</h3>
+	</div>
+
+	<div class="modal fade" id="challenge-window" tabindex="-1" role="dialog">
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				{% include "components/errors.html" %}
+			</div>
+		</div>
+
+		<div id='challenges-board'>
+			<div class="min-vh-50 d-flex align-items-center">
+				<div class="text-center w-100">
+					<i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block entrypoint %}
+	<script defer src="{{ url_for('views.themes', path='js/pages/challenges.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,19 @@
+
+/* ===== Banner Size Reduced ===== */
+.jumbotron, .hero {
+    padding: 40px 0 !important;
+    height: 30vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* ===== Footer Padding Removed ===== */
+footer {
+    padding: 5px 0 !important;
+    margin-bottom: 0 !important;
+}
+
+body {
+    margin-bottom: 0 !important;
+}
