@@ -144,7 +144,7 @@ class ServerConfig(object):
     CROSS_ORIGIN_OPENER_POLICY: str = empty_str_cast(config_ini["security"].get("CROSS_ORIGIN_OPENER_POLICY")) \
         or "same-origin-allow-popups"
 
-    TRUSTED_HOSTS: list[str] | None = None
+    TRUSTED_HOSTS: Union[list, None] = None
     if config_ini["security"].get("TRUSTED_HOSTS"):
         TRUSTED_HOSTS = [
             h.strip() for h in empty_str_cast(config_ini["security"].get("TRUSTED_HOSTS")).split(",")
