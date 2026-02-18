@@ -11130,3 +11130,21 @@ blockquote {
     margin-left: -1.5em;
     font-size: 50%
 }
+
+/* Reduce button glow globally: lower focus ring and remove text/filter glows */
+.btn:hover,
+.btn:focus,
+.btn.focus,
+.btn:active:focus,
+.btn.active:focus,
+.show>.btn.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .08rem rgba(0, 0, 0, 0.12) !important;
+    text-shadow: none !important;
+    filter: none !important;
+}
+
+/* Also ensure inner elements don't carry text-glow */
+.btn *, button * {
+    text-shadow: none !important;
+    filter: none !important;
+}
