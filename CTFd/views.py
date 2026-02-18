@@ -205,14 +205,7 @@ def setup():
                 set_config("ctf_banner", f.location)
 
             # Splice in our banner
-            index = f"""<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <img class="w-100 mx-auto d-block" style="max-width: 500px;padding: 50px;padding-top: 14vh;" src="/themes/final3/static/img/cryptix_logo_final.png"
- />
-        <br>
-       
-    </div>
-</div>"""
+            index = f"""<img class="w-100 mx-auto d-block" style="max-width: 500px;padding: 50px;padding-top: 14vh;" src="/themes/final3/static/img/cryptix_logo_final.png" />"""
             page.content = index
 
             # Visibility
