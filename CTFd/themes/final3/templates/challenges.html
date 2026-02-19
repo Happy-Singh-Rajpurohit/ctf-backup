@@ -81,47 +81,53 @@
 
 	.cryptix-banner-section {
 		background-color: transparent;
-		/* Remove solid black background if it clashes */
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 2rem 0;
+		padding: 0;
+		/* Fully attached to navbar */
 		margin: 0;
-		margin-top: 2rem;
-		/* Give it space below navbar */
-		max-height: 250px;
+		max-height: 120px;
 		overflow: hidden;
 	}
 
 	.cryptix-banner-section img {
 		max-width: 100%;
 		width: auto;
-		/* Let it size naturally */
 		height: auto;
-		max-height: 200px;
+		max-height: 80px;
+		/* Much smaller size */
 		display: block;
 		object-fit: contain;
 	}
 
 	.challenge-instructions {
-		background-color: #000000;
+		background-color: transparent;
+		/* Removed solid background */
 		text-align: center;
-		padding: 3rem 1rem;
+		padding: 2rem 1rem;
 		margin: 0;
 		position: relative;
-		overflow: hidden;
-		min-height: 150px;
+		z-index: 2;
 	}
 
 	.challenge-instructions h3 {
-		color: #00ffff;
-		font-size: 1.5rem;
-		font-weight: 500;
+		color: #ffffff;
+		font-size: 1.2rem;
+		font-weight: 400;
 		margin: 0;
-		text-shadow: 0 0 3px rgba(0, 255, 255, 0.05);
-		position: relative;
-		z-index: 2;
-		font-family: 'Roboto', sans-serif;
+		padding: 15px 40px;
+		display: inline-block;
+		background: rgba(20, 20, 20, 0.65);
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 50px;
+		/* Attractive pill shape */
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+		border-bottom: 2px solid #00ff00;
+		/* Subtle tech accent */
+		letter-spacing: 1px;
+		font-family: 'Montserrat', sans-serif;
 	}
 
 	/* Simple Button Styles - 5% Shadow Only */
