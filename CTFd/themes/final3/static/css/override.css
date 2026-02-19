@@ -1,6 +1,6 @@
-
 /* ===== Banner Size Reduced ===== */
-.jumbotron, .hero {
+.jumbotron,
+.hero {
     padding: 40px 0 !important;
     height: 30vh !important;
     display: flex !important;
@@ -9,7 +9,8 @@
 }
 
 /* ===== Footer Padding Removed ===== */
-footer, .footer {
+footer,
+.footer {
     padding: 5px 0 !important;
     margin-bottom: 0 !important;
     border-top: none !important;
@@ -22,18 +23,49 @@ body {
 }
 
 /* ===== Font Families ===== */
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     font-family: 'Roboto', sans-serif !important;
 }
 
-p, span, div, a, li, td, th, label, input, textarea, select {
+p,
+span,
+div,
+a,
+li,
+td,
+th,
+label,
+input,
+textarea,
+select {
     font-family: 'Montserrat', sans-serif !important;
 }
 
 /* ===== Simple Button Styles - 5% Shadow Only ===== */
-.btn, button, input[type="submit"], input[type="button"], 
-.btn-primary, .btn-success, .btn-info, .btn-outline-secondary,
-.btn-danger, .btn-warning, .btn-secondary, .btn-dark, .btn-light {
+.btn,
+button,
+input[type="submit"],
+input[type="button"],
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-outline-secondary,
+.btn-danger,
+.btn-warning,
+.btn-secondary,
+.btn-dark,
+.btn-light {
     font-family: 'Montserrat', sans-serif !important;
     box-shadow: 0 2px 4px rgba(0, 255, 255, 0.05) !important;
     text-shadow: none !important;
@@ -42,47 +74,67 @@ p, span, div, a, li, td, th, label, input, textarea, select {
     border: 1px solid rgba(0, 255, 255, 0.3) !important;
 }
 
-.btn:hover, button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
     box-shadow: 0 3px 6px rgba(0, 255, 255, 0.05) !important;
     transform: none !important;
     filter: none !important;
 }
 
-.btn:focus, button:focus, input[type="submit"]:focus, input[type="button"]:focus {
+.btn:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="button"]:focus {
     box-shadow: 0 3px 6px rgba(0, 255, 255, 0.05) !important;
 }
 
-.btn:active, button:active, input[type="submit"]:active, input[type="button"]:active {
+.btn:active,
+button:active,
+input[type="submit"]:active,
+input[type="button"]:active {
     box-shadow: 0 1px 2px rgba(0, 255, 255, 0.05) !important;
 }
 
 /* Remove all text shadows and effects from buttons */
-.btn *, button *, input[type="submit"] *, input[type="button"] * {
+.btn *,
+button *,
+input[type="submit"] *,
+input[type="button"] * {
     text-shadow: none !important;
 }
 
 /* Challenge cards */
-.challenge-button, .challenge-card {
+.challenge-button,
+.challenge-card {
     box-shadow: 0 2px 4px rgba(0, 255, 255, 0.05) !important;
 }
 
-.challenge-button:hover, .challenge-card:hover {
+.challenge-button:hover,
+.challenge-card:hover {
     box-shadow: 0 3px 6px rgba(0, 255, 255, 0.05) !important;
 }
 
 /* Remove mirror/reflection effects */
-.btn::before, .btn::after, button::before, button::after {
+.btn::before,
+.btn::after,
+button::before,
+button::after {
     display: none !important;
 }
 
 
 /* ===== Hacker Background ===== */
 body {
+    background-color: #000 !important;
+    /* Fallback for image */
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('https://c4.wallpaperflare.com/wallpaper/158/364/189/code-matrix-programming-hacking-wallpaper-preview.jpg') no-repeat center center fixed !important;
+        url('https://c4.wallpaperflare.com/wallpaper/158/364/189/code-matrix-programming-hacking-wallpaper-preview.jpg') no-repeat center center fixed !important;
     background-size: cover !important;
     backdrop-filter: blur(3px) !important;
-    color: #00ff00 !important; /* Green text for hacker theme */
+    color: #00ff00 !important;
+    /* Green text for hacker theme */
 }
 
 /* ===== Auth Box Design ===== */
@@ -90,13 +142,16 @@ body {
     background: rgba(0, 0, 0, 0.8);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Green glow */
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    /* Green glow */
     border: 1px solid rgba(0, 255, 0, 0.3);
     margin-top: 20px;
     color: #fff;
 }
 
-.auth-box h1, .auth-box h2, .auth-box h3 {
+.auth-box h1,
+.auth-box h2,
+.auth-box h3 {
     color: #00ff00 !important;
     text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
 }
