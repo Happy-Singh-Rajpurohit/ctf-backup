@@ -125,41 +125,52 @@ button::after {
 }
 
 
-/* ===== Hacker Background ===== */
+/* ===== Force Background Globally ===== */
 body {
-    background-color: #000 !important;
-    /* Fallback for image */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('https://c4.wallpaperflare.com/wallpaper/158/364/189/code-matrix-programming-hacking-wallpaper-preview.jpg') no-repeat center center fixed !important;
+    background-color: #111 !important;
+    min-height: 100vh !important;
+    color: #dedede !important;
+    position: relative;
+    z-index: 0;
+}
+
+/* Background image layer for blur and darken effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/158/364/189/code-matrix-programming-hacking-wallpaper-preview.jpg') !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
     background-size: cover !important;
-    backdrop-filter: blur(3px) !important;
-    color: #00ff00 !important;
-    /* Green text for hacker theme */
+    filter: blur(8px) brightness(0.6) !important;
+    z-index: -1;
 }
 
-/* ===== Auth Box Design ===== */
+/* ===== Auth Box (Login/Register/Team) ===== */
 .auth-box {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-    /* Green glow */
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    margin-top: 20px;
-    color: #fff;
+    background-color: rgba(20, 20, 20, 0.65) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-top: 3px solid #00ff00 !important;
+    /* Tech accent */
+    border-radius: 8px !important;
+    padding: 40px !important;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7) !important;
+    /* Deep shadow */
+    max-width: 100% !important;
 }
 
-.auth-box h1,
-.auth-box h2,
-.auth-box h3 {
-    color: #00ff00 !important;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
-}
-
-.auth-box .form-control {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid #00ff00;
-    color: #00ff00;
+.auth-logo {
+    max-width: 250px !important;
+    /* Increased size */
+    margin: 0 auto 20px auto !important;
+    display: block !important;
 }
 
 .auth-box .form-control:focus {

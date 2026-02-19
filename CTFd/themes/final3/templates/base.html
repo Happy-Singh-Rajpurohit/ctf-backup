@@ -25,11 +25,26 @@
         /* CRITICAL: FAILSARFE Styles to ensure theme applies even if external CSS fails */
         body {
             background-color: #111 !important;
+            margin: 0;
+            min-height: 100vh !important;
+            position: relative;
+        }
+
+        /* Pseudo-element for background image so we can blur it without blurring the content */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             background-image: url("{{ url_for('views.themes', path='img/bg.jpg') }}") !important;
             background-repeat: no-repeat !important;
-            background-attachment: fixed !important;
             background-size: cover !important;
-            min-height: 100vh !important;
+            background-position: center !important;
+            filter: blur(8px) brightness(0.6) !important;
+            /* Blur and darken */
+            z-index: -1;
         }
 
         .auth-box {
@@ -45,7 +60,8 @@
         }
 
         .auth-logo {
-            max-width: 180px !important;
+            max-width: 250px !important;
+            /* Increased size */
             margin: 0 auto 20px auto !important;
             display: block !important;
         }
