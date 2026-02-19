@@ -75,3 +75,62 @@ p, span, div, a, li, td, th, label, input, textarea, select {
     display: none !important;
 }
 
+
+/* ===== Hacker Background ===== */
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://c4.wallpaperflare.com/wallpaper/158/364/189/code-matrix-programming-hacking-wallpaper-preview.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
+    backdrop-filter: blur(3px) !important;
+    color: #00ff00 !important; /* Green text for hacker theme */
+}
+
+/* ===== Auth Box Design ===== */
+.auth-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Green glow */
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    margin-top: 20px;
+    color: #fff;
+}
+
+.auth-box h1, .auth-box h2, .auth-box h3 {
+    color: #00ff00 !important;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+}
+
+.auth-box .form-control {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ff00;
+    color: #00ff00;
+}
+
+.auth-box .form-control:focus {
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    color: #00ff00;
+}
+
+.auth-box .btn-primary {
+    background-color: transparent !important;
+    border-color: #00ff00 !important;
+    color: #00ff00 !important;
+    box-shadow: 0 0 5px #00ff00 !important;
+}
+
+.auth-box .btn-primary:hover {
+    background-color: #00ff00 !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px #00ff00 !important;
+}
+
+.auth-box a {
+    color: #00ff00 !important;
+    text-decoration: underline;
+}
+
+.auth-box small.text-muted {
+    color: #aaa !important;
+}
