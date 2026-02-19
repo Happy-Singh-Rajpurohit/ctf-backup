@@ -21,6 +21,26 @@
     {% block stylesheets %}
     {% endblock %}
 
+    <style>
+        /* CRITICAL: FAILSARFE Styles to ensure theme applies even if external CSS fails */
+        body {
+            background-color: #111 !important;
+            background-image: url('https://c4.wallpaperflare.com/wallpaper/158/364/189/code-matrix-programming-hacking-wallpaper-preview.jpg') !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+            background-size: cover !important;
+            min-height: 100vh !important;
+        }
+
+        .auth-box {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            border: 1px solid #00ff00 !important;
+            padding: 30px !important;
+            margin-top: 20px !important;
+            display: block !important;
+        }
+    </style>
+
     {{ Plugins.styles }}
     <script type="text/javascript">
         var init = {
