@@ -34,7 +34,8 @@
 		height: 100vh;
 		pointer-events: none;
 		opacity: 0.7;
-		z-index: 999;
+		z-index: 1;
+		/* Lower z-index so it stays in background */
 	}
 
 	.page-cyber-left svg {
@@ -42,7 +43,7 @@
 		height: 100%;
 	}
 
-	/* Right Side - Full Page Height Circuit Lines (Same as Left) */
+	/* Right Side - Full Page Height Circuit Lines */
 	.page-cyber-right {
 		position: fixed;
 		right: 0;
@@ -51,7 +52,8 @@
 		height: 100vh;
 		pointer-events: none;
 		opacity: 0.7;
-		z-index: 999;
+		z-index: 1;
+		/* Lower z-index so it stays in background */
 	}
 
 	.page-cyber-right svg {
@@ -59,7 +61,7 @@
 		height: 100%;
 	}
 
-	/* Circuit glow animation - Reduced to 5% shadow */
+	/* Circuit glow animation */
 	@keyframes circuit-glow {
 
 		0%,
@@ -85,10 +87,10 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0;
-		/* Fully attached to navbar */
 		margin: 0;
 		max-height: 120px;
-		overflow: hidden;
+		position: relative;
+		z-index: 10;
 	}
 
 	.cryptix-banner-section img {
@@ -96,19 +98,17 @@
 		width: auto;
 		height: auto;
 		max-height: 80px;
-		/* Much smaller size */
 		display: block;
 		object-fit: contain;
 	}
 
 	.challenge-instructions {
 		background-color: transparent;
-		/* Removed solid background */
 		text-align: center;
 		padding: 2rem 1rem;
 		margin: 0;
 		position: relative;
-		z-index: 2;
+		z-index: 10;
 	}
 
 	.challenge-instructions h3 {
@@ -122,27 +122,19 @@
 		backdrop-filter: blur(10px);
 		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 50px;
-		/* Attractive pill shape */
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 		border-bottom: 2px solid #00ff00;
-		/* Subtle tech accent */
 		letter-spacing: 1px;
 		font-family: 'Montserrat', sans-serif;
 	}
 
-	/* Simple Button Styles - 5% Shadow Only */
+	/* Remove aggressive background overrides that might hide buttons */
 	.btn,
 	button,
-	input[type="submit"],
-	.btn-primary,
-	.btn-success,
-	.btn-info,
-	.btn-outline-secondary {
+	input[type="submit"] {
 		font-family: 'Montserrat', sans-serif !important;
 		box-shadow: 0 2px 4px rgba(0, 255, 255, 0.05) !important;
 		text-shadow: none !important;
-		background-image: none !important;
-		border: 1px solid rgba(0, 255, 255, 0.3) !important;
 	}
 
 	.btn:hover,
@@ -152,14 +144,13 @@
 		transform: none !important;
 	}
 
-	/* Remove all text shadows and effects from buttons */
-	.btn *,
-	button *,
-	input[type="submit"] * {
-		text-shadow: none !important;
+	/* Wrapper for the challenges board to ensure it stays on top */
+	.challenges-board-wrapper {
+		position: relative;
+		z-index: 15;
+		margin-top: 1rem;
 	}
 
-	/* Remove footer border */
 	footer,
 	.footer {
 		border-top: none !important;
@@ -178,23 +169,19 @@
 		}
 
 		.challenge-instructions {
-			padding: 2rem 0.5rem;
-			min-height: 120px;
+			padding: 1rem 0.5rem;
+			min-height: 80px;
 		}
 
 		.challenge-instructions h3 {
-			font-size: 1.2rem;
+			font-size: 1.1rem;
+			padding: 10px 20px;
 		}
 
 		.page-cyber-left,
 		.page-cyber-right {
-			width: 150px;
-			opacity: 0.5;
-		}
-
-		.page-particle {
-			width: 4px;
-			height: 4px;
+			display: none;
+			/* Hide complex SVGs on mobile for performance/visibility */
 		}
 	}
 </style>
@@ -370,7 +357,7 @@
 <div class="modal fade" id="challenge-window" tabindex="-1" role="dialog">
 </div>
 
-<div class="container">
+<div class="container challenges-board-wrapper">
 	<div class="row">
 		<div class="col-md-12">
 			{% include "components/errors.html" %}
